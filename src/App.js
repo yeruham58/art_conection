@@ -2,20 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { CssBaseline } from '@material-ui/core';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import { Navbar, Products, Cart, Checkout } from './components';
+import { Navbar, ArtworkList, Cart, Checkout } from './components';
 import { commerce } from './lib/commerce';
 
 const App = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [products, setProducts] = useState([]);
+  const [artworkList, setArtworkList] = useState([]);
   const [cart, setCart] = useState({});
   const [order, setOrder] = useState({});
   const [errorMessage, setErrorMessage] = useState('');
 
-  const fetchProducts = async () => {
+  const fetchArtworkList = async () => {
     const { data } = await commerce.products.list();
 
-    setProducts(data);
+    setArtworkList(data);
   };
 
   const fetchCart = async () => {
@@ -65,7 +65,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    fetchProducts();
+    fetchArtworkList();
     fetchCart();
   }, []);
 
@@ -78,7 +78,7 @@ const App = () => {
         <Navbar totalItems={cart.total_items} handleDrawerToggle={handleDrawerToggle} />
         <Switch>
           <Route exact path="/">
-            <Products products={products} onAddToCart={handleAddToCart} handleUpdateCartQty />
+            <ArtworkList artworkList={artworkList} onAddToCart={handleAddToCart} handleUpdateCartQty />
           </Route>
           <Route exact path="/cart">
             <Cart cart={cart} onUpdateCartQty={handleUpdateCartQty} onRemoveFromCart={handleRemoveFromCart} onEmptyCart={handleEmptyCart} />
