@@ -1,6 +1,13 @@
 import React from 'react'
-import { Card, CardMedia, CardContent, CardActions, Typography, IconButton } from '@material-ui/core'
-import { AddShoppingCart } from '@material-ui/icons';
+import {
+  Card,
+  CardMedia,
+  CardContent,
+  CardActions,
+  Typography,
+  IconButton,
+} from '@material-ui/core'
+import { AddShoppingCart } from '@material-ui/icons'
 
 import useStyles from './styles'
 
@@ -11,7 +18,11 @@ const ArtworkItem = ({ artwork, onAddToCart }) => {
 
   return (
     <Card className={classes.root}>
-      <CardMedia className={classes.media} image={artwork.image.url} title={artwork.name} />
+      <CardMedia
+        className={classes.media}
+        image={artwork.image.url}
+        title={artwork.name}
+      />
       <CardContent>
         <div className={classes.cardContent}>
           <Typography gutterBottom variant="h5" component="h2">
@@ -21,7 +32,12 @@ const ArtworkItem = ({ artwork, onAddToCart }) => {
             ${artwork.price.formatted}
           </Typography>
         </div>
-        <Typography dangerouslySetInnerHTML={{ __html: artwork.description }} variant="body2" color="textSecondary" component="p" />
+        <Typography
+          dangerouslySetInnerHTML={{ __html: artwork.description }}
+          variant="body2"
+          color="textSecondary"
+          component="p"
+        />
       </CardContent>
       <CardActions disableSpacing className={classes.cardActions}>
         <IconButton aria-label="Add to Cart" onClick={handleAddToCart}>
@@ -33,4 +49,3 @@ const ArtworkItem = ({ artwork, onAddToCart }) => {
 }
 
 export default ArtworkItem
-
