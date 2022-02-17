@@ -14,7 +14,7 @@ import { Link, useLocation } from 'react-router-dom'
 import logo from '../../assets/logo.png'
 import useStyles from './styles'
 
-const PrimarySearchAppBar = ({ totalItems }) => {
+const TopNavbar = ({ totalItems }: { totalItems: number }) => {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null)
   const classes = useStyles()
   const location = useLocation()
@@ -71,7 +71,7 @@ const PrimarySearchAppBar = ({ totalItems }) => {
           </Typography>
           <div className={classes.grow} />
           {location.pathname === '/' && (
-            <div className={classes.button}>
+            <div>
               <IconButton
                 component={Link}
                 to="/cart"
@@ -91,4 +91,4 @@ const PrimarySearchAppBar = ({ totalItems }) => {
   )
 }
 
-export default PrimarySearchAppBar
+export default TopNavbar

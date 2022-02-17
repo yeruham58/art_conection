@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import CartItem from './CartItem/CartItem'
 import useStyles from './styles'
 
-function Cart({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) {
+const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) => {
   const classes = useStyles()
 
   const handleEmptyCart = () => onEmptyCart()
@@ -20,7 +20,7 @@ function Cart({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) {
     </Typography>
   )
 
-  if (!cart.line_items) return 'Loading'
+  if (!cart.line_items) return <>Loading</>
 
   const renderCart = () => (
     <>

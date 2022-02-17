@@ -17,10 +17,20 @@ import AddressForm from '../AddressForm'
 import PaymentForm from '../PaymentForm'
 import useStyles from './styles'
 
+import { Cart } from '@chec/commerce.js/types/cart'
+import { CheckoutToken } from '@chec/commerce.js/types/checkout-token'
+
 const steps = ['Shipping address', 'Payment details']
 
-const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
-  const [checkoutToken, setCheckoutToken] = useState(null)
+type Props = {
+  cart: Cart | null
+  onCaptureCheckout: any
+  order: any
+  error: any
+}
+
+const Checkout = ({ cart, onCaptureCheckout, order, error }: Props) => {
+  const [checkoutToken, setCheckoutToken] = useState<CheckoutToken | null>(null)
   const [activeStep, setActiveStep] = useState(0)
   const [shippingData, setShippingData] = useState({})
   const classes = useStyles()
@@ -30,7 +40,7 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
   const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1)
 
   useEffect(() => {
-    if (cart.id) {
+    if (cart?.id) {
       const generateToken = async () => {
         try {
           const token = await commerce.checkout.generateToken(cart.id, {
@@ -47,7 +57,7 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
     }
   }, [cart, activeStep, history])
 
-  const test = (data) => {
+  const test = (data: React.SetStateAction<{}>) => {
     setShippingData(data)
 
     nextStep()
@@ -93,8 +103,6 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
     activeStep === 0 ? (
       <AddressForm
         checkoutToken={checkoutToken}
-        nextStep={nextStep}
-        setShippingData={setShippingData}
         test={test}
       />
     ) : (
