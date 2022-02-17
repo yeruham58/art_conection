@@ -2,7 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { CssBaseline } from '@material-ui/core'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-import { Cart, ArtworkList, TopNavbar, Checkout } from './components'
+import {
+  Cart,
+  ArtworkList,
+  TopNavbar,
+  Checkout,
+  SideNavbar,
+} from './components'
 import { commerce } from './lib/commerce'
 import { Product } from '@chec/commerce.js/types/product'
 import { Cart as CartType } from '@chec/commerce.js/types/cart'
@@ -87,7 +93,9 @@ const App = () => {
     <Router>
       <div style={{ display: 'flex' }}>
         <CssBaseline />
+        <SideNavbar />
         <TopNavbar totalItems={cart?.total_items ?? 0} />
+
         <Switch>
           <Route exact path="/">
             <ArtworkList

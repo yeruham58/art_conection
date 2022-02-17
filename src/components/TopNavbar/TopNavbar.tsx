@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import {
   AppBar,
   Toolbar,
+  Drawer,
   IconButton,
   Badge,
   MenuItem,
@@ -52,7 +53,7 @@ const TopNavbar = ({ totalItems }: { totalItems: number }) => {
   )
 
   return (
-    <>
+    <Drawer anchor="top" open={true} variant="permanent">
       <AppBar position="fixed" className={classes.appBar} color="inherit">
         <Toolbar>
           <Typography
@@ -64,8 +65,8 @@ const TopNavbar = ({ totalItems }: { totalItems: number }) => {
           >
             <img
               src={logo}
-              alt="artConection.js"
-              height="70px"
+              alt="artConection.img"
+              height="50px"
               className={classes.image}
             />
           </Typography>
@@ -87,7 +88,7 @@ const TopNavbar = ({ totalItems }: { totalItems: number }) => {
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
-    </>
+    </Drawer>
   )
 }
 

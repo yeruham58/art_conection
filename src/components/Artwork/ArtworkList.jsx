@@ -5,15 +5,24 @@ import ArtworkItem from './ArtworkItem/ArtworkItem'
 import useStyles from './styles'
 
 const ArtworkList = ({ artworkList, onAddToCart }) => {
-  const classes = useStyles();
+  const classes = useStyles()
 
-  if (!artworkList.length) return <p>Loading...</p>;
+  if (!artworkList.length) return <p>Loading...</p>
 
   return (
     <main className={classes.content}>
       <div className={classes.toolbar} />
       <Grid container justify="center" spacing={4}>
-        {artworkList.map((artwork) => (
+        {[
+          artworkList[0],
+          artworkList[0],
+          artworkList[0],
+          artworkList[0],
+          artworkList[0],
+          artworkList[0],
+          artworkList[0],
+          artworkList[0],
+        ].map((artwork) => (
           <Grid key={artwork.id} item xs={12} sm={6} md={4} lg={3}>
             <ArtworkItem artwork={artwork} onAddToCart={onAddToCart} />
           </Grid>
@@ -24,4 +33,3 @@ const ArtworkList = ({ artworkList, onAddToCart }) => {
 }
 
 export default ArtworkList
-
