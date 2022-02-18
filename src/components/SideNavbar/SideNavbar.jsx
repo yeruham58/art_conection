@@ -1,10 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
-import { Drawer, Typography } from '@material-ui/core'
+import { Drawer, MenuList, MenuItem } from '@material-ui/core'
 import { navItems } from './navItems'
 
 const SideNavbar = () => {
+  const location = useLocation()
   return (
     <Drawer
       anchor="left"
@@ -13,15 +14,30 @@ const SideNavbar = () => {
       style={{ width: 200 }}
     >
       <div style={{ width: 200, margin: '90px 0px' }}>
-        <Typography>
+        <MenuList>
           {navItems.map((navItem, index) => (
-            <div>
-              <Link to={navItem.path} key={index}>
-                {navItem.name}
-              </Link>
-            </div>
+            <Link
+              to={navItem.path}
+              key={index}
+              style={{ textDecoration: 'none' }}
+            >
+              <MenuItem
+                style={{
+                  height: 50,
+                }}
+              >
+                <strong
+                  style={{
+                    color:
+                      location.pathname === navItem.path ? '#D10A0F' : 'black',
+                  }}
+                >
+                  {navItem.name}
+                </strong>
+              </MenuItem>
+            </Link>
           ))}
-        </Typography>
+        </MenuList>
       </div>
     </Drawer>
   )

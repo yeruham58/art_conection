@@ -6,15 +6,23 @@ type NavItem = {
 
 export const navItems: NavItem[] = [
   {
+    name: 'Home',
+    path: '/',
+  },
+  {
     name: 'Artwork list',
-    path: 'artwork-list',
+    path: '/artwork-list',
   },
   {
     name: 'Artists',
-    path: 'artists',
+    path: '/artists',
   },
   {
     name: 'Art connections',
-    path: 'art-connections',
+    path: '/art-connections',
+  },
+  {
+    name: 'About us',
+    path: '/about',
   },
 ]
