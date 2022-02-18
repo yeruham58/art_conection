@@ -1,61 +1,37 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
   AppBar,
   Toolbar,
   Drawer,
   IconButton,
   Badge,
-  MenuItem,
-  Menu,
   Typography,
 } from '@material-ui/core'
-import { ShoppingCart } from '@material-ui/icons'
+import { ShoppingCart, Menu as MenuIcon } from '@material-ui/icons'
 import { Link, useLocation } from 'react-router-dom'
 
 import logo from '../../assets/logo.png'
 import useStyles from './styles'
 
-const TopNavbar = ({ totalItems }: { totalItems: number }) => {
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null)
+type Props = {
+  isMobile: boolean
+  totalItems: number
+  toggleSidebar: () => void
+}
+
+const TopNavbar = ({ totalItems, isMobile, toggleSidebar }: Props) => {
   const classes = useStyles()
   const location = useLocation()
 
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
-
-  const handleMobileMenuClose = () => setMobileMoreAnchorEl(null)
-
-  const mobileMenuId = 'primary-search-account-menu-mobile'
-
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton
-          component={Link}
-          to="/cart"
-          aria-label="Show cart items"
-          color="inherit"
-        >
-          <Badge badgeContent={totalItems} color="secondary">
-            <ShoppingCart />
-          </Badge>
-        </IconButton>
-        <p>Cart</p>
-      </MenuItem>
-    </Menu>
-  )
-
   return (
-    <Drawer anchor="top" open={true} variant="permanent">
+    <Drawer anchor="top" variant="permanent">
       <AppBar position="fixed" className={classes.appBar} color="inherit">
         <Toolbar>
+          {isMobile && (
+            <Typography>
+              <MenuIcon onClick={toggleSidebar} />
+            </Typography>
+          )}
           <Typography
             component={Link}
             to="/"
@@ -87,7 +63,6 @@ const TopNavbar = ({ totalItems }: { totalItems: number }) => {
           )}
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
     </Drawer>
   )
 }

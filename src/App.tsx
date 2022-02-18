@@ -15,11 +15,29 @@ import { Cart as CartType } from '@chec/commerce.js/types/cart'
 import { CheckoutCapture } from '@chec/commerce.js/types/checkout-capture'
 
 const App = () => {
-  // const [mobileOpen, setMobileOpen] = useState(false)
   const [artworkList, setArtworkList] = useState<Product[]>([])
   const [cart, setCart] = useState<CartType | null>(null)
   const [order, setOrder] = useState({})
   const [errorMessage, setErrorMessage] = useState('')
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 700)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(!isMobile)
+
+  const handleWindowSizeChange = () => {
+    setIsMobile(window.innerWidth < 700)
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', handleWindowSizeChange)
+    return () => {
+      window.removeEventListener('resize', handleWindowSizeChange)
+    }
+  }, [])
+
+  useEffect(() => {
+    setIsSidebarOpen(!isMobile)
+  }, [isMobile])
+
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen)
 
   const fetchArtworkList = async () => {
     const { data } = await commerce.products.list()
@@ -87,14 +105,18 @@ const App = () => {
     fetchCart()
   }, [])
 
-  // const handleDrawerToggle = () => setMobileOpen(!mobileOpen)
-
   return (
     <Router>
       <div style={{ display: 'flex' }}>
         <CssBaseline />
-        <SideNavbar />
-        <TopNavbar totalItems={cart?.total_items ?? 0} />
+        {isSidebarOpen && (
+          <SideNavbar isMobile={isMobile} toggleSidebar={toggleSidebar} />
+        )}
+        <TopNavbar
+          totalItems={cart?.total_items ?? 0}
+          isMobile={isMobile}
+          toggleSidebar={toggleSidebar}
+        />
 
         <Switch>
           <Route exact path="/">
