@@ -19,43 +19,41 @@ const SideNavbar = ({ isMobile, toggleSidebar }: Props) => {
   )
 
   return (
-    <Drawer anchor="left" variant="permanent" style={{ width: 200 }}>
-      <div style={{ width: 200, margin: `${isMobile ? '60' : '90'}px 0px` }}>
+    <Drawer anchor="left" variant="permanent" style={{ width: 220 }}>
+      <div style={{ width: 220, margin: `${isMobile ? '60' : '90'}px 0px` }}>
         <MenuList>
           {isMobile && (
-            <div>
-              <Close
-                style={{ float: 'right', margin: 10 }}
-                onClick={toggleSidebar}
-              />
+            <div style={{ marginLeft: 180 }}>
+              <Close onClick={toggleSidebar} />
             </div>
           )}
-          {navItems.map((navItem, index) => (
-            <SidenavItem>
-              <Link
-                to={navItem.path}
-                key={index}
-                style={{ textDecoration: 'none' }}
-              >
-                <MenuItem
-                  style={{
-                    height: 50,
-                  }}
+          {navItems.map((navItem, index) => {
+            const color =
+              location.pathname === navItem.path ? '#D10A0F' : 'black'
+
+            return (
+              <SidenavItem>
+                <Link
+                  to={navItem.path}
+                  key={index}
+                  style={{ textDecoration: 'none' }}
                 >
-                  <strong
+                  <MenuItem
                     style={{
-                      color:
-                        location.pathname === navItem.path
-                          ? '#D10A0F'
-                          : 'black',
+                      height: 50,
                     }}
                   >
-                    {navItem.name}
-                  </strong>
-                </MenuItem>
-              </Link>
-            </SidenavItem>
-          ))}
+                    {navItem.icon && (
+                      <div style={{ color, marginRight: 10 }}>
+                        {navItem.icon}
+                      </div>
+                    )}
+                    <strong style={{ color }}>{navItem.name}</strong>
+                  </MenuItem>
+                </Link>
+              </SidenavItem>
+            )
+          })}
         </MenuList>
       </div>
     </Drawer>
