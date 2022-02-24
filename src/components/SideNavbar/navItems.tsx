@@ -1,5 +1,11 @@
 import React from 'react'
-import { Home, Collections, ColorLens, Info } from '@material-ui/icons'
+import {
+  Home,
+  Collections,
+  ColorLens,
+  Info,
+  CardGiftcard,
+} from '@material-ui/icons'
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism'
 import { ReactElement } from 'react'
 
@@ -29,6 +35,11 @@ export const navItems: NavItem[] = [
     name: 'Art connections',
     path: '/art-connections',
     icon: <VolunteerActivismIcon />,
+  },
+  {
+    name: 'Gift cards',
+    path: '/gift-cards',
+    icon: <CardGiftcard />,
   },
   {
     name: 'About us',

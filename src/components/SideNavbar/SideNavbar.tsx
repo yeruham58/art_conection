@@ -32,17 +32,9 @@ const SideNavbar = ({ isMobile, toggleSidebar }: Props) => {
               location.pathname === navItem.path ? '#D10A0F' : 'black'
 
             return (
-              <SidenavItem>
-                <Link
-                  to={navItem.path}
-                  key={index}
-                  style={{ textDecoration: 'none' }}
-                >
-                  <MenuItem
-                    style={{
-                      height: 50,
-                    }}
-                  >
+              <SidenavItem key={index}>
+                <Link to={navItem.path} style={{ textDecoration: 'none' }}>
+                  <MenuItem style={{ height: 50 }}>
                     {navItem.icon && (
                       <div style={{ color, marginRight: 10 }}>
                         {navItem.icon}
