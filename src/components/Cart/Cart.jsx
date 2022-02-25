@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 import CartItem from './CartItem/CartItem'
 import useStyles from './styles'
+import { paths } from '../../utils/paths'
 
 const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) => {
   const classes = useStyles()
@@ -13,7 +14,7 @@ const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) => {
   const renderEmptyCart = () => (
     <Typography variant="subtitle1">
       You have no items in your shopping cart,
-      <Link className={classes.link} to="/">
+      <Link className={classes.link} to={paths.home}>
         start adding some
       </Link>
       !

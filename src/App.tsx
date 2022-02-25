@@ -14,6 +14,8 @@ import { Product } from '@chec/commerce.js/types/product'
 import { Cart as CartType } from '@chec/commerce.js/types/cart'
 import { CheckoutCapture } from '@chec/commerce.js/types/checkout-capture'
 
+import { paths } from './utils/paths'
+
 const App = () => {
   const [artworkList, setArtworkList] = useState<Product[]>([])
   const [cart, setCart] = useState<CartType | null>(null)
@@ -119,13 +121,13 @@ const App = () => {
         />
 
         <Switch>
-          <Route exact path="/">
+          <Route exact path={paths.home}>
             <ArtworkList
               artworkList={artworkList}
               onAddToCart={handleAddToCart}
             />
           </Route>
-          <Route exact path="/cart">
+          <Route exact path={paths.cart}>
             <Cart
               cart={cart}
               onUpdateCartQty={handleUpdateCartQty}
@@ -133,7 +135,7 @@ const App = () => {
               onEmptyCart={handleEmptyCart}
             />
           </Route>
-          <Route path="/checkout" exact>
+          <Route path={paths.checkout} exact>
             <Checkout
               cart={cart}
               order={order}

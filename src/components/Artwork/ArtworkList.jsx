@@ -12,7 +12,7 @@ const ArtworkList = ({ artworkList, onAddToCart }) => {
   return (
     <main className={classes.content}>
       <div className={classes.toolbar} />
-      <Grid container justify="center" spacing={4}>
+      <Grid container justifyContent="center" spacing={4}>
         {[
           artworkList[0],
           artworkList[0],

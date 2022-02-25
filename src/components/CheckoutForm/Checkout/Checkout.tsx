@@ -20,6 +20,8 @@ import useStyles from './styles'
 import { Cart } from '@chec/commerce.js/types/cart'
 import { CheckoutToken } from '@chec/commerce.js/types/checkout-token'
 
+import { paths } from '../../../utils/paths'
+
 const steps = ['Shipping address', 'Payment details']
 
 type Props = {
@@ -77,7 +79,12 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }: Props) => {
           </Typography>
         </div>
         <br />
-        <Button component={Link} variant="outlined" type="button" to="/">
+        <Button
+          component={Link}
+          variant="outlined"
+          type="button"
+          to={paths.home}
+        >
           Back to home
         </Button>
       </>
@@ -92,7 +99,12 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }: Props) => {
       <>
         <Typography variant="h5">Error: {error}</Typography>
         <br />
-        <Button component={Link} variant="outlined" type="button" to="/">
+        <Button
+          component={Link}
+          variant="outlined"
+          type="button"
+          to={paths.home}
+        >
           Back to home
         </Button>
       </>
@@ -101,10 +113,7 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }: Props) => {
 
   const Form = () =>
     activeStep === 0 ? (
-      <AddressForm
-        checkoutToken={checkoutToken}
-        test={test}
-      />
+      <AddressForm checkoutToken={checkoutToken} test={test} />
     ) : (
       <PaymentForm
         checkoutToken={checkoutToken}

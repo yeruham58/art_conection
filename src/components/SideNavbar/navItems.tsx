@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import {
   Home,
   Collections,
@@ -7,7 +7,8 @@ import {
   CardGiftcard,
 } from '@material-ui/icons'
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism'
-import { ReactElement } from 'react'
+
+import { paths } from '../../utils/paths'
 
 type NavItem = {
   name: string
@@ -18,32 +19,32 @@ type NavItem = {
 export const navItems: NavItem[] = [
   {
     name: 'Home',
-    path: '/',
+    path: paths.home,
     icon: <Home />,
   },
   {
     name: 'Artwork list',
-    path: '/artwork-list',
+    path: paths.artworkList,
     icon: <Collections />,
   },
   {
     name: 'Artists',
-    path: '/artists',
+    path: paths.artists,
     icon: <ColorLens />,
   },
   {
     name: 'Art connections',
-    path: '/art-connections',
+    path: paths.artConnections,
     icon: <VolunteerActivismIcon />,
   },
   {
     name: 'Gift cards',
-    path: '/gift-cards',
+    path: paths.giftCards,
     icon: <CardGiftcard />,
   },
   {
     name: 'About us',
-    path: '/about',
+    path: paths.about,
     icon: <Info />,
   },
 ]

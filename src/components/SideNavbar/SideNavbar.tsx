@@ -1,8 +1,11 @@
 import React, { FC } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
-import { Drawer, MenuList, MenuItem } from '@material-ui/core'
+import { Drawer, MenuList, MenuItem, Typography } from '@material-ui/core'
 import { Close } from '@material-ui/icons'
+
+import { theme } from '../../utils/theme'
+import { AuthButtons } from '..'
 
 import { navItems } from './navItems'
 
@@ -29,7 +32,9 @@ const SideNavbar = ({ isMobile, toggleSidebar }: Props) => {
           )}
           {navItems.map((navItem, index) => {
             const color =
-              location.pathname === navItem.path ? '#D10A0F' : 'black'
+              location.pathname === navItem.path
+                ? theme.color.red
+                : theme.color.black
 
             return (
               <SidenavItem key={index}>
@@ -48,6 +53,11 @@ const SideNavbar = ({ isMobile, toggleSidebar }: Props) => {
           })}
         </MenuList>
       </div>
+      {isMobile && (
+        <Typography align="center" style={{ marginTop: 40 }} component={'span'}>
+          <AuthButtons isMobile onClick={toggleSidebar} />
+        </Typography>
+      )}
     </Drawer>
   )
 }

@@ -11,6 +11,8 @@ import { ShoppingCart, Menu as MenuIcon } from '@material-ui/icons'
 import { Link, useLocation } from 'react-router-dom'
 
 import logo from '../../assets/logo.png'
+import { paths } from '../../utils/paths'
+import { AuthButtons } from '..'
 import useStyles from './styles'
 
 type Props = {
@@ -34,7 +36,7 @@ const TopNavbar = ({ totalItems, isMobile, toggleSidebar }: Props) => {
           )}
           <Typography
             component={Link}
-            to="/"
+            to={paths.home}
             variant="h6"
             className={classes.title}
             color="inherit"
@@ -47,11 +49,12 @@ const TopNavbar = ({ totalItems, isMobile, toggleSidebar }: Props) => {
             />
           </Typography>
           <div className={classes.grow} />
-          {location.pathname === '/' && (
-            <div>
+          {!isMobile && <AuthButtons />}
+          {![paths.cart, paths.checkout].includes(location.pathname) && (
+            <div style={{ marginLeft: 10 }}>
               <IconButton
                 component={Link}
-                to="/cart"
+                to={paths.cart}
                 aria-label="Show cart items"
                 color="inherit"
               >
