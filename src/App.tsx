@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { CssBaseline } from '@material-ui/core'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
+import { GoogleAuthProvider } from './components/Authentication/store/context'
 import {
   Cart,
   ArtworkList,
@@ -108,44 +109,46 @@ const App = () => {
   }, [])
 
   return (
-    <Router>
-      <div style={{ display: 'flex' }}>
-        <CssBaseline />
-        {isSidebarOpen && (
-          <SideNavbar isMobile={isMobile} toggleSidebar={toggleSidebar} />
-        )}
-        <TopNavbar
-          totalItems={cart?.total_items ?? 0}
-          isMobile={isMobile}
-          toggleSidebar={toggleSidebar}
-        />
+    <GoogleAuthProvider>
+      <Router>
+        <div style={{ display: 'flex' }}>
+          <CssBaseline />
+          {isSidebarOpen && (
+            <SideNavbar isMobile={isMobile} toggleSidebar={toggleSidebar} />
+          )}
+          <TopNavbar
+            totalItems={cart?.total_items ?? 0}
+            isMobile={isMobile}
+            toggleSidebar={toggleSidebar}
+          />
 
-        <Switch>
-          <Route exact path={paths.home}>
-            <ArtworkList
-              artworkList={artworkList}
-              onAddToCart={handleAddToCart}
-            />
-          </Route>
-          <Route exact path={paths.cart}>
-            <Cart
-              cart={cart}
-              onUpdateCartQty={handleUpdateCartQty}
-              onRemoveFromCart={handleRemoveFromCart}
-              onEmptyCart={handleEmptyCart}
-            />
-          </Route>
-          <Route path={paths.checkout} exact>
-            <Checkout
-              cart={cart}
-              order={order}
-              onCaptureCheckout={handleCaptureCheckout}
-              error={errorMessage}
-            />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+          <Switch>
+            <Route exact path={paths.home}>
+              <ArtworkList
+                artworkList={artworkList}
+                onAddToCart={handleAddToCart}
+              />
+            </Route>
+            <Route exact path={paths.cart}>
+              <Cart
+                cart={cart}
+                onUpdateCartQty={handleUpdateCartQty}
+                onRemoveFromCart={handleRemoveFromCart}
+                onEmptyCart={handleEmptyCart}
+              />
+            </Route>
+            <Route path={paths.checkout} exact>
+              <Checkout
+                cart={cart}
+                order={order}
+                onCaptureCheckout={handleCaptureCheckout}
+                error={errorMessage}
+              />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    </GoogleAuthProvider>
   )
 }
 

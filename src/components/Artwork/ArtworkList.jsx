@@ -22,8 +22,8 @@ const ArtworkList = ({ artworkList, onAddToCart }) => {
           artworkList[0],
           artworkList[0],
           artworkList[0],
-        ].map((artwork) => (
-          <Grid key={artwork.id} item xs={12} sm={6} md={4} lg={3}>
+        ].map((artwork, index) => (
+          <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
             <ArtworkItem artwork={artwork} onAddToCart={onAddToCart} />
           </Grid>
         ))}

@@ -1,47 +1,92 @@
 import React from 'react'
-import { Button, ButtonGroup } from '@material-ui/core'
-import { Link, useLocation } from 'react-router-dom'
+import { Button, Menu, MenuItem, Box } from '@material-ui/core'
 
-import { paths } from '../../../utils/paths'
+import Google from '@mui/icons-material/Google'
+import Logout from '@mui/icons-material/Logout'
+
+import { useGoogleAuth } from '../store/context'
 import { theme } from '../../../utils/theme'
 
 type Props = {
   isMobile?: boolean
-  onClick?: () => void
 }
 
-const AuthButtons = ({ isMobile, onClick }: Props) => {
-  const location = useLocation()
+const AuthButtons = ({ isMobile }: Props) => {
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+  const open = Boolean(anchorEl)
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget)
+  }
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
 
-  const isInLoginPage = location.pathname === paths.login
-  const isInSignupPage = location.pathname === paths.signup
+  const { signIn, isSignedIn, googleUser, signOut } = useGoogleAuth()
 
-  return (
-    <ButtonGroup
-      aria-label="text button group"
-      size="small"
-      variant={isMobile ? 'outlined' : 'text'}
-      onClick={onClick}
-    >
-      <Button
-        component={Link}
-        to={paths.login}
-        disabled={isInLoginPage}
-        onClick={onClick}
-      >
-        <strong style={{ color: isInLoginPage ? undefined : theme.color.blue }}>
-          Login
-        </strong>
-      </Button>
-      <Button component={Link} to={paths.signup} disabled={isInSignupPage}>
-        <strong
-          style={{ color: isInSignupPage ? undefined : theme.color.blue }}
-        >
-          Sign up
-        </strong>
-      </Button>
-    </ButtonGroup>
+  const googleLoginButton = (
+    <Button onClick={signIn} variant={isMobile ? 'text' : 'outlined'}>
+      <strong style={{ color: theme.color.blue, margin: 8 }}>
+        Sign in with Google
+      </strong>
+      <Google style={{ color: theme.color.red }} />
+    </Button>
   )
+
+  const logoutButtonContent = (
+    <>
+      <Logout style={{ color: theme.color.blue }} />
+      <strong style={{ color: theme.color.blue, margin: 8 }}>Sign out</strong>
+    </>
+  )
+
+  const googleLogoutButton = (
+    <>
+      {isMobile ? (
+        <Button onClick={signOut} variant="outlined">
+          {logoutButtonContent}
+        </Button>
+      ) : (
+        <div>
+          <Box>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <strong style={{ margin: 16, fontSize: 16 }}>
+                Welcome {googleUser?.profileObj?.givenName}!
+              </strong>
+              <img
+                alt="profile pic"
+                src={googleUser?.profileObj?.imageUrl}
+                onClick={handleClick}
+                style={{
+                  width: 32,
+                  height: 32,
+                  borderRadius: '50%',
+                  cursor: 'pointer',
+                }}
+              />
+            </div>
+          </Box>
+
+          <Menu
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            style={{ marginTop: 38 }}
+          >
+            <MenuItem
+              onClick={() => {
+                handleClose()
+                signOut()
+              }}
+            >
+              {logoutButtonContent}
+            </MenuItem>
+          </Menu>
+        </div>
+      )}
+    </>
+  )
+
+  return <>{isSignedIn ? googleLogoutButton : googleLoginButton}</>
 }
 
 export default AuthButtons

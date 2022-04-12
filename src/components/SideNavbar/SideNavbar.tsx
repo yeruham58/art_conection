@@ -55,7 +55,7 @@ const SideNavbar = ({ isMobile, toggleSidebar }: Props) => {
       </div>
       {isMobile && (
         <Typography align="center" style={{ marginTop: 40 }} component={'span'}>
-          <AuthButtons isMobile onClick={toggleSidebar} />
+          <AuthButtons isMobile />
         </Typography>
       )}
     </Drawer>
