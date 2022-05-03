@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Card,
   CardMedia,
@@ -8,11 +8,24 @@ import {
   IconButton,
 } from '@material-ui/core'
 import { AddShoppingCart } from '@material-ui/icons'
+import { commerce } from '../../../lib/commerce'
 
 import useStyles from './styles'
 
-const ArtworkItem = ({ artwork, onAddToCart }) => {
+const ArtworkItem = ({ artwork, onAddToCart, artistCategoryId }) => {
+  const [artistCategory, setArtistCategory] = useState(null)
+
+  const fetchArtist = async () => {
+    setArtistCategory(await commerce.categories.retrieve(artistCategoryId))
+  }
+
   const classes = useStyles()
+
+  if (!artistCategory && artistCategoryId) {
+    fetchArtist()
+  }
+
+  console.log(artistCategory)
 
   const handleAddToCart = () => onAddToCart(artwork.id, 1)
 

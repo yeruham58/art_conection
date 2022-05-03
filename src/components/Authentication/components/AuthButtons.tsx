@@ -4,6 +4,7 @@ import { Button, Menu, MenuItem, Box } from '@material-ui/core'
 import Google from '@mui/icons-material/Google'
 import Logout from '@mui/icons-material/Logout'
 
+import defaultProfileImg from '../../../assets/defaultProfileImg.png'
 import { useGoogleAuth } from '../store/context'
 import { theme } from '../../../utils/theme'
 
@@ -54,7 +55,7 @@ const AuthButtons = ({ isMobile }: Props) => {
               </strong>
               <img
                 alt="profile pic"
-                src={googleUser?.profileObj?.imageUrl}
+                src={googleUser?.profileObj?.imageUrl ?? defaultProfileImg}
                 onClick={handleClick}
                 style={{
                   width: 32,
