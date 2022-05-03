@@ -39,8 +39,8 @@ const ArtistList = () => {
                 <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
                   <ArtistItem
                     artistName={artist.name}
-                    artistTitle=""
                     artistUrl={artist?.assets[0].url ?? ''}
+                    artistId={artist.id}
                   />
                 </Grid>
               )
