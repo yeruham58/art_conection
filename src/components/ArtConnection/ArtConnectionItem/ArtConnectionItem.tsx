@@ -7,43 +7,48 @@ import { commerce } from '../../../lib/commerce'
 import useStyles from './styles'
 
 type Props = {
-  artistName: string
-  artistUrl: string
-  artistId: string
+  artConnectionName: string
+  artConnectionUrl: string
+  artConnectionId: string
 }
 
-const ArtistItem = ({ artistName, artistUrl, artistId }: Props) => {
+const ArtConnectionItem = ({
+  artConnectionName,
+  artConnectionUrl,
+  artConnectionId,
+}: Props) => {
   const classes = useStyles()
 
-  const [artistCategory, setArtistCategory] = useState<Category | null>(null)
+  const [artConnectionCategory, setArtConnectionCategory] =
+    useState<Category | null>(null)
 
-  const fetchArtist = async () => {
-    setArtistCategory(await commerce.categories.retrieve(artistId))
+  const fetchArtConnection = async () => {
+    setArtConnectionCategory(
+      await commerce.categories.retrieve(artConnectionId)
+    )
   }
 
-  if (!artistCategory) {
-    fetchArtist()
+  if (!artConnectionCategory) {
+    fetchArtConnection()
   }
-
-  console.log(artistCategory)
 
   return (
     <Card className={classes.root}>
       <CardMedia
         className={classes.media}
-        image={artistUrl}
-        title={artistName}
+        image={artConnectionUrl}
+        title={artConnectionName}
       />
       <CardContent>
         <div className={classes.cardContent}>
           <Typography gutterBottom variant="h5" component="h2">
-            {artistName}
+            {artConnectionName}
           </Typography>
         </div>
-        {artistCategory && (
+        {artConnectionCategory && (
           <Typography
             dangerouslySetInnerHTML={{
-              __html: artistCategory.description ?? '',
+              __html: artConnectionCategory.description ?? '',
             }}
             variant="body2"
             color="textSecondary"
@@ -55,4 +60,4 @@ const ArtistItem = ({ artistName, artistUrl, artistId }: Props) => {
   )
 }
 
-export default ArtistItem
+export default ArtConnectionItem
