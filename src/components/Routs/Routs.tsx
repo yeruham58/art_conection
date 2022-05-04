@@ -3,13 +3,13 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import { CssBaseline } from '@material-ui/core'
 
-import { Product } from '@chec/commerce.js/types/product'
 import { Cart as CartType } from '@chec/commerce.js/types/cart'
 import { CheckoutCapture } from '@chec/commerce.js/types/checkout-capture'
 
 import { commerce } from '../../lib/commerce'
 import {
   Cart,
+  HomePage,
   ArtworkList,
   ArtistList,
   ArtConnectionList,
@@ -20,7 +20,6 @@ import {
 import { paths } from '../../utils/paths'
 
 const Routs = () => {
-  const [artworkList, setArtworkList] = useState<Product[]>([])
   const [cart, setCart] = useState<CartType | null>(null)
   const [order, setOrder] = useState({})
   const [errorMessage, setErrorMessage] = useState('')
@@ -43,12 +42,6 @@ const Routs = () => {
   }, [isMobile])
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen)
-
-  const fetchArtworkList = async () => {
-    const { data } = await commerce.products.list()
-
-    setArtworkList(data)
-  }
 
   const fetchCart = async () => {
     setCart(await commerce.cart.retrieve())
@@ -106,7 +99,6 @@ const Routs = () => {
   }
 
   useEffect(() => {
-    fetchArtworkList()
     fetchCart()
   }, [])
 
@@ -125,16 +117,10 @@ const Routs = () => {
 
         <Switch>
           <Route exact path={paths.home}>
-            <ArtworkList
-              artworkList={artworkList}
-              onAddToCart={handleAddToCart}
-            />
+            <HomePage onAddToCart={handleAddToCart} />
           </Route>
           <Route exact path={paths.artworkList}>
-            <ArtworkList
-              artworkList={artworkList}
-              onAddToCart={handleAddToCart}
-            />
+            <ArtworkList onAddToCart={handleAddToCart} />
           </Route>
           <Route exact path={paths.artists}>
             <ArtistList />
