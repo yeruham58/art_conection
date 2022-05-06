@@ -3,8 +3,8 @@ import {
   Home,
   Collections,
   ColorLens,
-  Info,
   CardGiftcard,
+  Loyalty,
 } from '@material-ui/icons'
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism'
 
@@ -45,6 +45,6 @@ export const navItems: NavItem[] = [
   {
     name: 'About us',
     path: paths.about,
-    icon: <Info />,
+    icon: <Loyalty />,
   },
 ]

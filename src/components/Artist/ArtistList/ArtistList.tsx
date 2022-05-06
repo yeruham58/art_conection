@@ -8,10 +8,7 @@ import Grid from '@material-ui/core/Grid'
 import { commerce } from '../../../lib/commerce'
 import ArtistItem from '../ArtistItem/ArtistItem'
 
-import useStyles from './styles'
-
 const ArtistList = () => {
-  const classes = useStyles()
   const location = useLocation()
 
   type ArtistListType = (Category & { assets: Asset[] })[]
@@ -31,22 +28,19 @@ const ArtistList = () => {
   return (
     <>
       {artistList?.length > 0 && (
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
-          <Grid container justifyContent="center" spacing={4}>
-            {artistList.map((artist, index) => {
-              return (
-                <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
-                  <ArtistItem
-                    artistName={artist.name}
-                    artistUrl={artist?.assets[0].url ?? ''}
-                    artistId={artist.id}
-                  />
-                </Grid>
-              )
-            })}
-          </Grid>
-        </main>
+        <Grid container justifyContent="center" spacing={4}>
+          {artistList.map((artist, index) => {
+            return (
+              <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
+                <ArtistItem
+                  artistName={artist.name}
+                  artistUrl={artist?.assets[0].url ?? ''}
+                  artistId={artist.id}
+                />
+              </Grid>
+            )
+          })}
+        </Grid>
       )}
     </>
   )

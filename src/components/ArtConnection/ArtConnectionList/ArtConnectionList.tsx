@@ -7,11 +7,7 @@ import Grid from '@material-ui/core/Grid'
 import { commerce } from '../../../lib/commerce'
 import ArtConnectionItem from '../ArtConnectionItem/ArtConnectionItem'
 
-import useStyles from './styles'
-
-const ArtistList = () => {
-  const classes = useStyles()
-
+const ArtConnectionList = () => {
   type ArtConnectionListType = (Category & { assets: Asset[] })[]
 
   const [artConnectionList, setArtConnectionList] =
@@ -30,25 +26,22 @@ const ArtistList = () => {
   return (
     <>
       {artConnectionList?.length > 0 && (
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
-          <Grid container justifyContent="center" spacing={4}>
-            {artConnectionList.map((artConnection, index) => {
-              return (
-                <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
-                  <ArtConnectionItem
-                    artConnectionName={artConnection.name}
-                    artConnectionUrl={artConnection?.assets[0].url ?? ''}
-                    artConnectionId={artConnection.id}
-                  />
-                </Grid>
-              )
-            })}
-          </Grid>
-        </main>
+        <Grid container justifyContent="center" spacing={4}>
+          {artConnectionList.map((artConnection, index) => {
+            return (
+              <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
+                <ArtConnectionItem
+                  artConnectionName={artConnection.name}
+                  artConnectionUrl={artConnection?.assets[0].url ?? ''}
+                  artConnectionId={artConnection.id}
+                />
+              </Grid>
+            )
+          })}
+        </Grid>
       )}
     </>
   )
 }
 
-export default ArtistList
+export default ArtConnectionList

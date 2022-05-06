@@ -16,10 +16,15 @@ import {
   TopNavbar,
   Checkout,
   SideNavbar,
+  About,
 } from '../../components'
 import { paths } from '../../utils/paths'
 
+import useStyles from './styles'
+
 const Routs = () => {
+  const classes = useStyles()
+
   const [cart, setCart] = useState<CartType | null>(null)
   const [order, setOrder] = useState({})
   const [errorMessage, setErrorMessage] = useState('')
@@ -114,37 +119,43 @@ const Routs = () => {
           isMobile={isMobile}
           toggleSidebar={toggleSidebar}
         />
-
-        <Switch>
-          <Route exact path={paths.home}>
-            <HomePage onAddToCart={handleAddToCart} />
-          </Route>
-          <Route exact path={paths.artworkList}>
-            <ArtworkList onAddToCart={handleAddToCart} />
-          </Route>
-          <Route exact path={paths.artists}>
-            <ArtistList />
-          </Route>
-          <Route exact path={paths.artConnections}>
-            <ArtConnectionList />
-          </Route>
-          <Route exact path={paths.cart}>
-            <Cart
-              cart={cart}
-              onUpdateCartQty={handleUpdateCartQty}
-              onRemoveFromCart={handleRemoveFromCart}
-              onEmptyCart={handleEmptyCart}
-            />
-          </Route>
-          <Route path={paths.checkout} exact>
-            <Checkout
-              cart={cart}
-              order={order}
-              onCaptureCheckout={handleCaptureCheckout}
-              error={errorMessage}
-            />
-          </Route>
-        </Switch>
+        {/* //TODO: make a wrapper componenet */}
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
+          <Switch>
+            <Route exact path={paths.home}>
+              <HomePage onAddToCart={handleAddToCart} />
+            </Route>
+            <Route exact path={paths.artworkList}>
+              <ArtworkList onAddToCart={handleAddToCart} />
+            </Route>
+            <Route exact path={paths.artists}>
+              <ArtistList />
+            </Route>
+            <Route exact path={paths.artConnections}>
+              <ArtConnectionList />
+            </Route>
+            <Route exact path={paths.about}>
+              <About />
+            </Route>
+            <Route exact path={paths.cart}>
+              <Cart
+                cart={cart}
+                onUpdateCartQty={handleUpdateCartQty}
+                onRemoveFromCart={handleRemoveFromCart}
+                onEmptyCart={handleEmptyCart}
+              />
+            </Route>
+            <Route path={paths.checkout} exact>
+              <Checkout
+                cart={cart}
+                order={order}
+                onCaptureCheckout={handleCaptureCheckout}
+                error={errorMessage}
+              />
+            </Route>
+          </Switch>
+        </main>
       </div>
     </Router>
   )

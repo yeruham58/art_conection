@@ -33,7 +33,7 @@ const SideNavbar = ({ isMobile, toggleSidebar }: Props) => {
           {navItems.map((navItem, index) => {
             const color =
               location.pathname === navItem.path
-                ? theme.color.red
+                ? theme.color.blue
                 : theme.color.black
 
             return (
