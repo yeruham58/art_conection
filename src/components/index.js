@@ -1,5 +1,5 @@
 export { default as TopNavbar } from './TopNavbar/TopNavbar'
-export { default as HomePage } from './Home/HomePage/HomePage'
+export { default as HomePage } from './Home/HomePage'
 export { default as ArtworkList } from './Artwork/ArtworkList/ArtworkList'
 export { default as ArtistList } from './Artist/ArtistList/ArtistList'
 export { default as ArtConnectionList } from './ArtConnection/ArtConnectionList/ArtConnectionList'

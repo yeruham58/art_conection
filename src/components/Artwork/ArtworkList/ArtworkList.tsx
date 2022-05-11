@@ -27,7 +27,7 @@ const ArtworkList = ({ onAddToCart }: Props) => {
   if (!artworkList.length) return <p>Loading...</p>
 
   return (
-    <Grid container justifyContent="center" spacing={4}>
+    <Grid container spacing={4}>
       {artworkList.map((artwork, index) => {
         const artistCategory = artwork?.categories?.find(
           ({ name }) => name === artwork.seo.title

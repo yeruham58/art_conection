@@ -26,7 +26,7 @@ const ArtConnectionList = () => {
   return (
     <>
       {artConnectionList?.length > 0 && (
-        <Grid container justifyContent="center" spacing={4}>
+        <Grid container spacing={4}>
           {artConnectionList.map((artConnection, index) => {
             return (
               <Grid key={index} item xs={12} sm={6} md={4} lg={3}>

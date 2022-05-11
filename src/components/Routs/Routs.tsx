@@ -124,7 +124,7 @@ const Routs = () => {
           <div className={classes.toolbar} />
           <Switch>
             <Route exact path={paths.home}>
-              <HomePage onAddToCart={handleAddToCart} />
+              <HomePage onAddToCart={handleAddToCart} isMobile={isMobile} />
             </Route>
             <Route exact path={paths.artworkList}>
               <ArtworkList onAddToCart={handleAddToCart} />
