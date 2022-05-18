@@ -11,8 +11,11 @@ import {
   Cart,
   HomePage,
   ArtworkList,
+  ArtworkPage,
   ArtistList,
+  ArtistPage,
   ArtConnectionList,
+  ArtConnectionPage,
   TopNavbar,
   Checkout,
   SideNavbar,
@@ -129,11 +132,20 @@ const Routs = () => {
             <Route exact path={paths.artworkList}>
               <ArtworkList onAddToCart={handleAddToCart} />
             </Route>
+            <Route path={paths.artworkPage}>
+              <ArtworkPage />
+            </Route>
             <Route exact path={paths.artists}>
               <ArtistList />
             </Route>
+            <Route path={paths.artistPage}>
+              <ArtistPage />
+            </Route>
             <Route exact path={paths.artConnections}>
               <ArtConnectionList />
+            </Route>
+            <Route path={paths.artConnectionPage}>
+              <ArtConnectionPage />
             </Route>
             <Route exact path={paths.about}>
               <About />

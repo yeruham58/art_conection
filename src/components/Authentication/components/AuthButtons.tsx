@@ -40,6 +40,8 @@ const AuthButtons = ({ isMobile }: Props) => {
     </>
   )
 
+  console.log(googleUser?.profileObj?.imageUrl)
+
   const googleLogoutButton = (
     <>
       {isMobile ? (
