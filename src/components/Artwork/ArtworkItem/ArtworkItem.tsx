@@ -10,32 +10,41 @@ import {
 } from '@material-ui/core'
 import { AddShoppingCart } from '@material-ui/icons'
 
+import { Product } from '@chec/commerce.js/types/product'
+import { Category } from '@chec/commerce.js/types/category'
+
 import { paths } from '../../../utils/paths'
 import { commerce } from '../../../lib/commerce'
 
 import useStyles from './styles'
 
-const ArtworkItem = ({ artwork, onAddToCart, artistCategoryId }) => {
-  const [artistCategory, setArtistCategory] = useState(null)
+type Props = {
+  artwork: Product
+  onAddToCart?: (artworId: string, anount: number) => void
+  artistCategoryId?: string
+}
 
-  const fetchArtist = async () => {
+const ArtworkItem = ({ artwork, onAddToCart, artistCategoryId }: Props) => {
+  const [artistCategory, setArtistCategory] = useState<Category | null>(null)
+
+  const fetchArtist = async (artistCategoryId: string) => {
     setArtistCategory(await commerce.categories.retrieve(artistCategoryId))
   }
 
   const classes = useStyles()
 
   if (!artistCategory && artistCategoryId) {
-    fetchArtist()
+    fetchArtist(artistCategoryId)
   }
 
-  const handleAddToCart = () => onAddToCart(artwork.id, 1)
+  const handleAddToCart = onAddToCart ? () => onAddToCart(artwork.id, 1) : null
 
   return (
     <Card className={classes.root}>
       <Link to={`${paths.artworkList}/${artwork.id}`}>
         <CardMedia
           className={classes.media}
-          image={artwork.image.url}
+          image={artwork?.image?.url}
           title={artwork.name}
         />
         <CardContent>
@@ -54,11 +63,15 @@ const ArtworkItem = ({ artwork, onAddToCart, artistCategoryId }) => {
             component="p"
           />
         </CardContent>
-        <CardActions disableSpacing className={classes.cardActions}>
-          <IconButton aria-label="Add to Cart" onClick={handleAddToCart}>
-            <AddShoppingCart />
-          </IconButton>
-        </CardActions>
+        <>
+          {handleAddToCart && (
+            <CardActions disableSpacing className={classes.cardActions}>
+              <IconButton aria-label="Add to Cart" onClick={handleAddToCart}>
+                <AddShoppingCart />
+              </IconButton>
+            </CardActions>
+          )}
+        </>
       </Link>
     </Card>
   )

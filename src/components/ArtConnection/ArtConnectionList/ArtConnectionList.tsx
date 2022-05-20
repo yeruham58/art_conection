@@ -14,12 +14,12 @@ const ArtConnectionList = () => {
     useState<ArtConnectionListType>([])
 
   commerce.categories.list().then(({ data }) => {
-    const artists = data.find(
+    const artConnections = data.find(
       ({ slug }) => slug === 'campaigns'
     ) as Category & { children: ArtConnectionListType }
 
-    if (artists?.children && !artConnectionList.length) {
-      setArtConnectionList(artists.children)
+    if (artConnections?.children && !artConnectionList.length) {
+      setArtConnectionList(artConnections.children)
     }
   })
 
@@ -33,6 +33,7 @@ const ArtConnectionList = () => {
                 <ArtConnectionItem
                   artConnectionName={artConnection.name}
                   artConnectionUrl={artConnection?.assets[0].url ?? ''}
+                  artConnectionSlug={artConnection.slug}
                   artConnectionId={artConnection.id}
                 />
               </Grid>

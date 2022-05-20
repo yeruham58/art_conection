@@ -12,12 +12,14 @@ import useStyles from './styles'
 type Props = {
   artConnectionName: string
   artConnectionUrl: string
+  artConnectionSlug: string
   artConnectionId: string
 }
 
 const ArtConnectionItem = ({
   artConnectionName,
   artConnectionUrl,
+  artConnectionSlug,
   artConnectionId,
 }: Props) => {
   const classes = useStyles()
@@ -37,7 +39,7 @@ const ArtConnectionItem = ({
 
   return (
     <Card className={classes.root}>
-      <Link to={`${paths.artConnections}/${artConnectionId}`}>
+      <Link to={`${paths.artConnections}/${artConnectionSlug}`}>
         <CardMedia
           className={classes.media}
           image={artConnectionUrl}

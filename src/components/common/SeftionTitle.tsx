@@ -6,7 +6,7 @@ import { theme } from '../../utils/theme'
 
 type Props = {
   title: string
-  isMobile: boolean
+  isMobile?: boolean
 }
 
 const SectionTitle = ({ title, isMobile }: Props) => {

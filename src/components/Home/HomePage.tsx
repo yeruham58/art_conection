@@ -10,7 +10,7 @@ import yellowBackground from '../../assets/background-2.jpg'
 import { paths } from '../../utils/paths'
 
 import { ArtworkList, ArtConnectionList, ArtistList } from '..'
-import SectionTitle from './SeftionTitle'
+import SectionTitle from '../common/SeftionTitle'
 
 type Props = {
   onAddToCart: (productId: string, quantity: number | undefined) => void
