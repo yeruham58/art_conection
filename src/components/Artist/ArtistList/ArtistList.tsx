@@ -33,6 +33,7 @@ const ArtistList = () => {
                   artistName={artist.name}
                   artistUrl={artist?.assets[0].url ?? ''}
                   artistId={artist.id}
+                  artistSlug={artist.slug}
                 />
               </Grid>
             )

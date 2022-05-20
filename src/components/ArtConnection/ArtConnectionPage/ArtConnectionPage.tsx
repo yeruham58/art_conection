@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useParams } from 'react-router'
+import { useParams, useHistory } from 'react-router'
 
 import { ProductCollection } from '@chec/commerce.js/features/products'
 import { Category } from '@chec/commerce.js/types/category'
@@ -8,7 +8,7 @@ import Grid from '@material-ui/core/Grid'
 import { Card } from '@material-ui/core'
 
 import { commerce } from '../../../lib/commerce'
-
+import { paths } from '../../../utils/paths'
 import ArtworkItem from '../../Artwork/ArtworkItem/ArtworkItem'
 import SectionTitle from '../../common/SeftionTitle'
 
@@ -16,6 +16,7 @@ type ArtConnectionType = Category & { assets: Asset[] }
 
 const ArtConnectionPage = () => {
   const params = useParams() as { slug: string }
+  const history = useHistory()
   const [categoryProducts, setCategoryProducts] =
     useState<ProductCollection | null>(null)
   const [artConnectionCategory, setArtConnectionCategory] =
@@ -24,7 +25,11 @@ const ArtConnectionPage = () => {
   const category_slug = params.slug
 
   const fetchCategoryProducts = async () => {
-    setCategoryProducts(await commerce.products.list({ category_slug }))
+    try {
+      setCategoryProducts(await commerce.products.list({ category_slug }))
+    } catch (e) {
+      history.push(paths.artConnections)
+    }
   }
 
   const fetchArtConnection = async (id: string) => {

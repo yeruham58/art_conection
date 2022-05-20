@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Grid from '@material-ui/core/Grid'
 
 import { Product } from '@chec/commerce.js/types/product'
@@ -20,9 +20,9 @@ const ArtworkList = ({ onAddToCart }: Props) => {
     setArtworkList(data)
   }
 
-  useEffect(() => {
+  if (!artworkList.length) {
     fetchArtworkList()
-  }, [])
+  }
 
   if (!artworkList.length) return <p>Loading...</p>
 

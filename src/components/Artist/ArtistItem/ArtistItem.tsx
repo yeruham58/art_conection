@@ -13,9 +13,10 @@ type Props = {
   artistName: string
   artistUrl: string
   artistId: string
+  artistSlug: string
 }
 
-const ArtistItem = ({ artistName, artistUrl, artistId }: Props) => {
+const ArtistItem = ({ artistName, artistUrl, artistId, artistSlug }: Props) => {
   const classes = useStyles()
 
   const [artistCategory, setArtistCategory] = useState<Category | null>(null)
@@ -30,7 +31,7 @@ const ArtistItem = ({ artistName, artistUrl, artistId }: Props) => {
 
   return (
     <Card className={classes.root}>
-      <Link to={`${paths.artists}/${artistId}`}>
+      <Link to={`${paths.artists}/${artistSlug}`}>
         <CardMedia
           className={classes.media}
           image={artistUrl}
